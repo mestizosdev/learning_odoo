@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+tax_authority.access_tax_authority_dashboard,access_tax_authority_dashboard,tax_authority.model_tax_authority_dashboard,base.group_user,1,1,1,1

@@ -1,0 +1,25 @@
+<odoo>
+    <record id="action_dashboard" model="ir.actions.act_window">
+        <field name="name">Tax Authority</field>
+        <field name="res_model">tax.authority.dashboard</field>
+        <field name="view_mode">kanban</field>
+        <field name="help" type="html">
+            <p>
+                Dashboard for the Tax Authority App.
+            </p>
+        </field>
+    </record>
+
+    <record id="view_kanban_dashboard" model="ir.ui.view">
+        <field name="model">tax.authority.dashboard</field>
+        <field name="arch" type="xml">
+            <kanban create="false">
+                <field name="name"/>
+                <templates>
+                    <t t-name="kanban-box">
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>
