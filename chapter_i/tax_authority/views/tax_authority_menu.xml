@@ -16,6 +16,7 @@
               sequence="1000">
         <menuitem id="menu_action_sign_certificate"
                   action="action_sign_certificate"
+                  name="Signer Certificate"
                   sequence="10"/>
         <menuitem id="menu_action_account_l10n_ec_sri_payment"
                   action="action_account_l10n_ec_sri_payment_tree"

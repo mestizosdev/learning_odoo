@@ -1,14 +1,14 @@
 from odoo import fields, models, api
 
 
-class SignCertificate(models.Model):
-    _name = 'sign.certificate'
+class SignerCertificate(models.Model):
+    _name = 'signer.certificate'
     _description = 'Electronic Signature Certificate'
 
     name = fields.Char(required=True)
-    file_content = fields.Binary(string="Signature File", readonly=True)
-    file_name = fields.Char(string="Filename", readonly=True)
-    password = fields.Char(string="Signing key", readonly=True)
+    file_content = fields.Binary(string="Signature File")
+    file_name = fields.Char(string="Filename")
+    password = fields.Char(string="Signing key")
     active = fields.Boolean(string="Active?", default=True)
     company_id = fields.Many2one(
         comodel_name="res.company",
@@ -33,3 +33,7 @@ class SignCertificate(models.Model):
         string="Serial number (certificate)", readonly=True
     )
     cert_version = fields.Char(string="Version", readonly=True)
+
+    def action_validate_and_load(self):
+        print("action_validate_and_load")
+        return True

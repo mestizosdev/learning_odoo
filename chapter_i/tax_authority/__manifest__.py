@@ -19,7 +19,7 @@
         'security/ir.model.access.csv',
         'views/dashboard.xml',
         'views/payment_method.xml',
-        'views/sign_certificate.xml',
+        'views/signer_certificate.xml',
         'views/tax_authority_menu.xml',
     ],
     'demo': [
