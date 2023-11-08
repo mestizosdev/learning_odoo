@@ -1,0 +1,4 @@
+certifi==2023.7.22
+cffi==1.16.0
+cryptography==36.0.2
+pyOpenSSL==23.3.0

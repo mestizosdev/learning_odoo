@@ -1,5 +1,9 @@
-from odoo import fields, models, api
+from odoo import fields, models, tools
+from typing import Union
 
+from cryptography.hazmat.primitives.serialization import pkcs12
+
+from base64 import b64decode
 
 class SignerCertificate(models.Model):
     _name = 'signer.certificate'
@@ -36,4 +40,34 @@ class SignerCertificate(models.Model):
 
     def action_validate_and_load(self):
         print("action_validate_and_load")
+        self._decode_certificate()
         return True
+
+    @tools.ormcache("self.file_content", "self.password", "self.state")
+    def _decode_certificate(self):
+        print("_decode_certificate")
+        file_content = b64decode(self.file_content)
+        self.read_pfx_file(file_content, self.password)
+
+    def read_pfx_file(self, pfx_file: Union[str, bytes], password):
+        try:
+            if isinstance(pfx_file, str):
+                with open(pfx_file, "rb") as cert_file:
+                    cert_content = cert_file.read()
+            elif isinstance(pfx_file, bytes):
+                cert_content = pfx_file
+            else:
+                raise RuntimeError("pfx_file must be str or bytes")
+
+            private_key, cert, additional_certificates = pkcs12.load_key_and_certificates(
+                cert_content,
+                password.encode()
+            )
+            print("private_key", private_key)
+            print("cert", cert)
+            print("additional_certificates", additional_certificates)
+
+        except FileNotFoundError as err:
+            raise FileNotFoundError(f"File not found. {err}")
+        except Exception as err:
+            raise Exception(f"Fail to open file. {err}")
